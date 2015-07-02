@@ -1,3 +1,9 @@
 # FootballStats
 
-This is a start of a fun project
+##Introduction
+
+##Goal
+
+##Data Source
+
+
