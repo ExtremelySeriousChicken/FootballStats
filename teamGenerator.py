@@ -8,10 +8,8 @@ def createTeam(data):
     newLeague = list()
     duplicate = 0
     id = 0
-    print data
     for team in data:
         #go through each
-        print team
 
         index = isExist(newLeague,team.home)
 
@@ -19,15 +17,11 @@ def createTeam(data):
             newLeague.append(teamProfile(id,team.home))
             id += 1
             duplicate = 0
-            print id
         else:
             duplicate += 1
 
         if(duplicate >= 20):
             break
-
-        for x in newLeague:
-            print(str(x.id) + ":" + x.teamName)
 
     return newLeague
 
@@ -51,7 +45,9 @@ def isExist(data, team):
 #            Return the index of the team
 
 def findIndex(league, team):
+
     for i in range(len(league)):
+        #print league[i].teamName + " vs " + team
         if league[i].teamName == team:
             return i
 
@@ -60,15 +56,16 @@ def findIndex(league, team):
 # Modifies : the table
 # Effects  : go through each of the fixtures and then calculate
 #            The statistics of the table
-def calculatePts(table,fixtures):
+def calculatePts(table,fixtures,year):
     for game in fixtures:
         #go through each game
         homeIndex = findIndex(table, game.home)
         awayIndex = findIndex(table, game.away)
 
         if((homeIndex == -1) or (awayIndex == -1)):
-            print "There is something wrong with calculate pts!"
-            exit(1)
+            print game.home + ": " + str(homeIndex) + "; " + game.away + ": " + str(awayIndex)
+            print "error in the year " + year + ";home: " + game.home + ";away: " +game.away
+            #exit(1)
 
         #now check the scores
         #adding the goal
@@ -79,12 +76,10 @@ def calculatePts(table,fixtures):
 
         #if the home team wins
         if (game.h > game.a):
-            print "home wins!"
             table[homeIndex].win += 1
             table[homeIndex].points += 3
             table[awayIndex].lose += 1
         elif (game.h < game.a):
-            print "away wins!"
             table[awayIndex].win += 1
             table[awayIndex].points += 3
             table[homeIndex].lose += 1
@@ -93,9 +88,5 @@ def calculatePts(table,fixtures):
             table[homeIndex].points += 1
             table[awayIndex].draw += 1
             table[awayIndex].points += 1
-
-    for x in table:
-        print "Team name | Wins | Draw | Lose | Points | Goal for | Goal Conceded"
-        print x.teamName + " | " + str(x.win) + " | " + str(x.draw) + " | " + str(x.lose) + " | " + str(x.points) + " | " + str(x.goalFor) + " | " + str(x.goalConceded)
 
     return table

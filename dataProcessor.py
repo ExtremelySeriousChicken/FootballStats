@@ -4,12 +4,30 @@ from classes import *
 
 def readFile(filename):
     data = list()
-    with open("1-premierleague.csv", 'rb') as csvfile:
+    with open(filename, 'rb') as csvfile:
         reader = csv.reader(csvfile, delimiter=",", quotechar="|")
         for row in reader:
             data.append(row)
 
+    #now find the data
+    infoArray = data[0]
+    for x in range(len(infoArray)):
+        infoArray[x] = str(infoArray[x]).lower()
+        infoArray[x] = infoArray[x].replace(" ", "")
+
     del data[0]
+
+    dateIndex = -1
+    for x in range(len(infoArray)):
+        if infoArray[x] == "date":
+            dateIndex = x
+
+    if dateIndex == 1:
+        if dateIndex > 1:
+            print "there is something wrong with date Index!"
+            exit(1)
+        for x in range(len(data)):
+            del data[x][0]
 
     return data
 
@@ -33,11 +51,5 @@ def process(filename):
     gameList  = makeGame(data)
 
     #now we are going to process the winners
-
-    for x in gameList:
-         print (x.home + "," + x.away + "," + str(x.h) + "," + str(x.a))
-        # print x.away
-        # print x.h
-        # print x.a
 
     return gameList

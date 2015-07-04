@@ -1,5 +1,6 @@
 __author__ = 'Edward'
 import csv
+import os
 #this file will write csv file
 
 # Requires : The league
@@ -29,10 +30,16 @@ def stringify(league):
 
     return leagueArray
 
-def writeLeague(filename, league):
+def writeDir(resultDir, league):
+    if not os.path.exists(resultDir + league):
+        os.makedirs(resultDir + league)
 
-    printed = stringify(league)
-
-    with open("trying.csv","wb") as fp:
+def writer(filename, data):
+    with open(filename,"wb") as fp:
         a = csv.writer(fp,delimiter=',')
-        a.writerows(printed)
+        a.writerows(data)
+
+def writeTableMaker(filename, league):
+    printed = stringify(league)
+    writer(filename, printed)
+

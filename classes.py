@@ -17,3 +17,13 @@ class teamProfile(object):
         self.points = 0
         self.goalFor = 0
         self.goalConceded = 0
+
+class hypoOne(object):
+    def __init__(self):
+        self.games = 0
+        self.HomeHT = 0
+        self.HomeFT = 0
+        self.AwayHT = 0
+        self.AwayFT = 0
+        self.HomeHTFT = 0
+        self.AwayHTFT = 0

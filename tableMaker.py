@@ -11,12 +11,23 @@ from teamGenerator import *
 from teamWriter import *
 
 from fileSearcher import *
-data = process("a")
 
-league = createTeam(data)
+def makeTable():
+    listArray = searchFile()
 
-league = calculatePts(league, data)
+    for x in listArray:
+        country = x[0]
+        year = x[1]
 
-writeLeague("a",league)
+        fileName = x[2]
+        path = x[3]
+        data = process(path)
+        league = createTeam(data)
+        league = calculatePts(league,data,year)
+        writeTo = "results/tableMaker/" + country + "/" + year + "-" + fileName
+        writeDir("result/tableMaker/",country)
+        writeTableMaker(writeTo,league)
 
-searchFile()
+if __name__=="__main__":
+    makeTable()
+
