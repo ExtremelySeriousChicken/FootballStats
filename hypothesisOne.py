@@ -22,7 +22,7 @@ __author__ = 'Edward'
 #        f. P(FT | HT)
 #
 # 3.  From these data, we can test multiple hypothesis
-
+# NOTE: THE MATHEMATICS FOR THIS FILE AS OF 4/7/2015 is wrong!
 from classes import *
 
 from dataProcessor import *
