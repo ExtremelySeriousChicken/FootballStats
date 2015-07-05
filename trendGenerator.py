@@ -33,10 +33,10 @@ import os
 #
 #s
 from trend_helper import searchFile, processLeagueInfo
-from trend_helper2_v1 import convert
+from trend_helper2_v1 import convert, country, league, season
 if __name__=='__main__':
     leagueArray = searchFile()
 
 
     result = processLeagueInfo(leagueArray)
-    convert(result)
+    cleanResult = convert(result)
